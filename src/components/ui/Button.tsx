@@ -18,11 +18,9 @@ type ButtonAsLink = BaseProps &
 type ButtonProps = ButtonAsButton | ButtonAsLink;
 
 const variants: Record<ButtonVariant, string> = {
-  primary:
-    "bg-accent text-background hover:bg-accent/90 shadow-[0_0_24px_var(--color-accent-glow)]",
-  secondary:
-    "border border-border bg-surface-elevated text-foreground hover:border-accent/40 hover:bg-surface",
-  ghost: "text-muted hover:text-foreground",
+  primary: "bg-forest text-ivory hover:bg-forest-dark",
+  secondary: "border border-rule bg-beige/50 text-forest hover:border-champagne hover:bg-beige",
+  ghost: "text-muted hover:text-forest",
 };
 
 export function Button({
@@ -32,7 +30,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   const classes = cn(
-    "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+    "inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3 text-sm font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-champagne",
     variants[variant],
     className
   );

@@ -1,19 +1,18 @@
 export type PortfolioProject = {
   id: string;
+  number: string;
   title: string;
   category: string;
   description: string;
   tags: string[];
   url: string;
-  isDesignStudy?: boolean;
-  accent: string;
+  previewImage?: string;
 };
 
 export type Capability = {
   id: string;
   title: string;
   description: string;
-  icon: string;
 };
 
 export type ProcessStep = {
@@ -24,75 +23,57 @@ export type ProcessStep = {
 };
 
 export const siteConfig = {
-  name: "Sebastian Happe",
-  title: "Sebastian Happe — Digital Products & Web Development",
+  name: "shape",
+  tagline: "DIGITALE ARCHITEKTUR",
+  title: "shape — Digitale Architektur",
   description:
-    "Websites, Landingpages und Progressive Web Apps — klar gestaltet, technisch sauber umgesetzt. Portfolio von Sebastian Happe.",
+    "Digitale Räume, geformt aus Ideen. Websites, Web Apps und Progressive Web Apps — präzise gestaltet und technisch umgesetzt von shape.",
   url: "https://sebastianhappe.de",
   email: "hello@sebastianhappe.de",
-  ogImage: "/og-image.png",
+  ogImage: "/shape_logo_primary@4x.png",
 };
 
 export const navLinks = [
-  { href: "#work", label: "Portfolio" },
+  { href: "#work", label: "Projekte" },
   { href: "#capabilities", label: "Leistungen" },
   { href: "#process", label: "Prozess" },
-  { href: "#about", label: "Über mich" },
+  { href: "#about", label: "Studio" },
   { href: "#contact", label: "Kontakt" },
 ];
 
 export const projects: PortfolioProject[] = [
   {
-    id: "atlas-pwa",
-    title: "Atlas Field Service",
+    id: "anslik-brandschutz",
+    number: "01",
+    title: "Anslik Brandschutz",
+    category: "Unternehmenswebsite",
+    description:
+      "Konzeption, Design und Entwicklung einer modernen Unternehmenswebsite mit klarer Informationsarchitektur und vertrauenswürdiger Markenwirkung.",
+    tags: ["Next.js", "Responsive", "SEO", "Corporate"],
+    url: "https://anslik-brandschutz.pages.dev/",
+    previewImage: "/projects/Anslik_Brandschutz.png",
+  },
+  {
+    id: "coachpilot-ai",
+    number: "02",
+    title: "CoachPilot AI",
     category: "Progressive Web App",
     description:
-      "Offline-fähige PWA für Außendienst-Teams mit Echtzeit-Sync, GPS-Routing und intuitivem Dashboard.",
-    tags: ["PWA", "React", "Offline-First", "TypeScript"],
-    url: "#",
-    accent: "#4d9fff",
+      "KI-gestützte PWA für Fahrer und Unternehmen — Mobile First, installierbar und für den täglichen Einsatz entwickelt.",
+    tags: ["AI", "PWA", "TypeScript", "Mobile First"],
+    url: "https://coachpilot-ai.pages.dev/",
+    previewImage: "/projects/CoachPilotAI.png",
   },
   {
-    id: "lumen-landing",
-    title: "Lumen Studio",
-    category: "Landingpage",
+    id: "moodpop",
+    number: "03",
+    title: "MoodPop",
+    category: "Interactive Experience",
     description:
-      "Conversion-optimierte Landingpage für ein Design-Studio mit scroll-basierten Animationen und klarem Funnel.",
-    tags: ["Next.js", "Animation", "SEO", "Performance"],
-    url: "#",
-    accent: "#7c6fff",
-  },
-  {
-    id: "craft-website",
-    title: "Craft & Co.",
-    category: "Website",
-    description:
-      "Mehrseitige Unternehmenswebsite für ein Handwerksunternehmen — modern, vertrauenswürdig, mobil-first.",
-    tags: ["Website", "CMS", "Responsive", "Accessibility"],
-    url: "#",
-    accent: "#38d9c0",
-  },
-  {
-    id: "pulse-dashboard",
-    title: "Pulse Analytics",
-    category: "Designstudie",
-    description:
-      "Konzept für ein Echtzeit-Analytics-Dashboard mit datengetriebenen Visualisierungen und Dark-Mode-UI.",
-    tags: ["UI/UX", "Dashboard", "Data Viz", "Figma"],
-    url: "#",
-    isDesignStudy: true,
-    accent: "#ff6b9d",
-  },
-  {
-    id: "flow-onboarding",
-    title: "Flow Onboarding",
-    category: "Designstudie",
-    description:
-      "Microinteraction-Studie für einen mehrstufigen Onboarding-Flow mit progressiven Disclosure-Patterns.",
-    tags: ["Microinteractions", "UX", "Motion", "Prototyp"],
-    url: "#",
-    isDesignStudy: true,
-    accent: "#ffb84d",
+      "Interaktive Web-App mit KI-generierten Inhalten, Animationen und spielerischer Benutzerführung.",
+    tags: ["AI", "Interactive", "Animations", "Frontend"],
+    url: "https://moodpop.pages.dev/",
+    previewImage: "/projects/Mood_Critters.png",
   },
 ];
 
@@ -101,87 +82,69 @@ export const capabilities: Capability[] = [
     id: "websites",
     title: "Websites",
     description:
-      "Mehrseitige Unternehmenswebsites mit klarer Struktur, schnellen Ladezeiten und professionellem Auftritt.",
-    icon: "◈",
+      "Individuelle Websites mit klarer Struktur, hochwertiger Gestaltung und schneller Performance.",
   },
   {
-    id: "landingpages",
-    title: "Landingpages",
+    id: "web-apps",
+    title: "Web Apps",
     description:
-      "Fokussierte Seiten für Kampagnen und Produkt-Launches — conversion-orientiert und visuell präzise.",
-    icon: "◇",
+      "Interaktive Anwendungen, Kundenbereiche und digitale Tools — direkt im Browser.",
   },
   {
     id: "pwa",
     title: "Progressive Web Apps",
     description:
-      "App-ähnliche Web-Erlebnisse mit Offline-Fähigkeit, Push-Notifications und installierbar auf jedem Gerät.",
-    icon: "⬡",
+      "Installierbare, offlinefähige Lösungen für mobile und stationäre Nutzung.",
   },
   {
-    id: "uiux",
-    title: "UI/UX",
+    id: "ui-ux",
+    title: "UI/UX Design",
     description:
-      "Durchdachte Interfaces mit Fokus auf Nutzerführung, Lesbarkeit und konsistentem Design-System.",
-    icon: "◎",
-  },
-  {
-    id: "animation",
-    title: "Animation & Microinteractions",
-    description:
-      "Dezente Bewegung, die Orientierung gibt und Interaktionen lebendig macht — ohne Ablenkung.",
-    icon: "◉",
-  },
-  {
-    id: "performance",
-    title: "Performance & SEO",
-    description:
-      "Technische Basis für schnelle Ladezeiten, gute Lighthouse-Scores und solide Suchmaschinen-Grundlagen.",
-    icon: "◆",
+      "Durchdachte Oberflächen, Nutzerführung und visuelle Systeme bis ins Detail.",
   },
   {
     id: "ai",
     title: "KI-Integration",
     description:
-      "Optionale Integration von KI-Features — Chatbots, Content-Assistenz oder intelligente Automatisierung.",
-    icon: "✦",
+      "Intelligente Funktionen, Automatisierungen und smarte Workflows in digitalen Produkten.",
   },
 ];
 
 export const processSteps: ProcessStep[] = [
   {
-    id: "understand",
+    id: "analyse",
     number: "01",
-    title: "Idee verstehen",
-    description:
-      "Ziele, Zielgruppe und Anforderungen klären. Was soll die Lösung leisten — und was nicht?",
+    title: "Analyse",
+    description: "Ziele, Kontext und Anforderungen verstehen — die Grundlage jedes Entwurfs.",
   },
   {
-    id: "structure",
+    id: "struktur",
     number: "02",
-    title: "Struktur entwickeln",
-    description:
-      "Informationsarchitektur, User Flows und technische Grundlage definieren, bevor Design beginnt.",
+    title: "Struktur",
+    description: "Informationsarchitektur, Abläufe und technische Basis definieren.",
   },
   {
-    id: "design",
+    id: "gestaltung",
     number: "03",
-    title: "Design formen",
-    description:
-      "Visuelles Konzept, Typografie und Interaktionsmuster — klar, konsistent, auf den Nutzer ausgerichtet.",
+    title: "Gestaltung",
+    description: "Visuelles Konzept, Typografie und Interaktion entwickeln.",
   },
   {
-    id: "build",
+    id: "entwicklung",
     number: "04",
-    title: "Umsetzung",
-    description:
-      "Sauberer, wartbarer Code mit modernen Technologien. Performance und Accessibility von Anfang an.",
+    title: "Entwicklung",
+    description: "Sauberer Code, Performance und Accessibility von Anfang an.",
   },
   {
     id: "launch",
     number: "05",
     title: "Launch",
-    description:
-      "Deployment, Testing und Übergabe. Optional: Monitoring, Updates und kontinuierliche Verbesserung.",
+    description: "Deployment, Testing und Übergabe des fertigen Produkts.",
+  },
+  {
+    id: "betreuung",
+    number: "06",
+    title: "Betreuung",
+    description: "Weiterentwicklung, Pflege und technische Unterstützung.",
   },
 ];

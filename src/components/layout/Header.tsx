@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { navLinks, siteConfig } from "@/data/site";
+import { navLinks } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 export function Header() {
@@ -10,7 +11,7 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -25,22 +26,20 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-        scrolled
-          ? "border-b border-border-subtle bg-background/80 backdrop-blur-xl"
-          : "bg-transparent"
+        "fixed inset-x-0 top-0 z-50 transition-colors duration-500",
+        scrolled ? "border-b border-rule bg-ivory/95" : "bg-ivory/60"
       )}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-8">
-        <a
-          href="#"
-          className="group flex items-center gap-2 text-sm font-medium tracking-tight text-foreground"
-          aria-label={`${siteConfig.name} — Startseite`}
-        >
-          <span className="flex h-7 w-7 items-center justify-center rounded-md border border-border bg-surface text-xs font-mono text-accent transition-colors group-hover:border-accent/40">
-            SH
-          </span>
-          <span className="hidden sm:inline">{siteConfig.name}</span>
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 md:px-8">
+        <a href="#" className="block shrink-0" aria-label="shape — Startseite">
+          <Image
+            src="/shape_logo_primary.svg"
+            alt="shape — Digitale Architektur"
+            width={120}
+            height={45}
+            className="h-7 w-auto md:h-8"
+            priority
+          />
         </a>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Hauptnavigation">
@@ -48,21 +47,21 @@ export function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="rounded-full px-4 py-2 text-sm text-muted transition-colors hover:text-foreground"
+              className="rounded-sm px-4 py-2 text-sm text-muted transition-colors hover:text-forest"
             >
               {link.label}
             </a>
           ))}
           <a
             href="#contact"
-            className="ml-2 rounded-full bg-accent px-5 py-2 text-sm font-medium text-background transition-all hover:bg-accent/90"
+            className="ml-3 rounded-sm bg-forest px-5 py-2 text-sm font-medium text-ivory transition-colors hover:bg-forest-dark"
           >
             Kontakt
           </a>
         </nav>
 
         <button
-          className="relative z-50 flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface md:hidden"
+          className="relative z-50 flex h-10 w-10 items-center justify-center rounded-sm border border-rule md:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label={menuOpen ? "Menü schließen" : "Menü öffnen"}
           aria-expanded={menuOpen}
@@ -71,20 +70,20 @@ export function Header() {
           <div className="flex flex-col gap-1.5">
             <span
               className={cn(
-                "block h-0.5 w-5 bg-foreground transition-all duration-300",
-                menuOpen && "translate-y-2 rotate-45"
+                "block h-px w-5 bg-forest transition-all duration-300",
+                menuOpen && "translate-y-[7px] rotate-45"
               )}
             />
             <span
               className={cn(
-                "block h-0.5 w-5 bg-foreground transition-all duration-300",
+                "block h-px w-5 bg-forest transition-all duration-300",
                 menuOpen && "opacity-0"
               )}
             />
             <span
               className={cn(
-                "block h-0.5 w-5 bg-foreground transition-all duration-300",
-                menuOpen && "-translate-y-2 -rotate-45"
+                "block h-px w-5 bg-forest transition-all duration-300",
+                menuOpen && "-translate-y-[7px] -rotate-45"
               )}
             />
           </div>
@@ -94,21 +93,21 @@ export function Header() {
       <AnimatePresence>
         {menuOpen && (
           <motion.nav
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-2 bg-background/95 backdrop-blur-xl md:hidden"
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-1 bg-ivory md:hidden"
             aria-label="Mobile Navigation"
           >
             {navLinks.map((link, i) => (
               <motion.a
                 key={link.href}
                 href={link.href}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.06 }}
-                className="rounded-full px-6 py-3 text-lg text-muted transition-colors hover:text-foreground"
+                transition={{ delay: i * 0.05 }}
+                className="px-6 py-3 text-lg text-muted transition-colors hover:text-forest"
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}
@@ -116,10 +115,10 @@ export function Header() {
             ))}
             <motion.a
               href="#contact"
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: navLinks.length * 0.06 }}
-              className="mt-4 rounded-full bg-accent px-8 py-3 text-lg font-medium text-background"
+              transition={{ delay: navLinks.length * 0.05 }}
+              className="mt-4 rounded-sm bg-forest px-8 py-3 text-lg font-medium text-ivory"
               onClick={() => setMenuOpen(false)}
             >
               Kontakt
