@@ -6,6 +6,7 @@ import {
   useScroll,
   useTransform,
   useReducedMotion,
+  type MotionValue,
 } from "framer-motion";
 import { processSteps } from "@/data/site";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -17,11 +18,10 @@ export function Process() {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"],
+    offset: ["start end", "end center"],
   });
 
-  const planOpacity = useTransform(scrollYProgress, [0, 0.3], [0.3, 1]);
-  const lineScale = useTransform(scrollYProgress, [0.1, 0.7], [0, 1]);
+  const lineProgress = useTransform(scrollYProgress, [0.1, 0.9], [0, 1]);
 
   return (
     <section
@@ -34,27 +34,28 @@ export function Process() {
         <FadeIn>
           <SectionHeading
             label="Prozess"
-            title="Vom Konzeptplan zum Produkt"
-            description="Idee, Struktur, Design, Entwicklung — ein durchgängiger Planungsprozess."
+            title="Vom ersten Entwurf zum Launch"
+            description="Idee → Konzept → Design → Entwicklung → Launch → Betreuung"
           />
         </FadeIn>
 
         <div className="relative">
-          <motion.div
-            className="arch-grid pointer-events-none absolute inset-0 rounded-sm border border-rule opacity-50"
-            style={{ opacity: prefersReducedMotion ? 0.5 : planOpacity }}
-            aria-hidden="true"
-          />
-
-          <motion.div
-            className="absolute left-6 top-0 hidden h-full w-px origin-top bg-champagne/40 md:left-8 md:block"
-            style={{ scaleY: prefersReducedMotion ? 1 : lineScale }}
-            aria-hidden="true"
-          />
+          <div className="absolute bottom-0 left-4 top-0 hidden w-px md:left-5 md:block" aria-hidden="true">
+            <motion.div
+              className="h-full w-full origin-top bg-gradient-to-b from-champagne/60 via-champagne/30 to-transparent"
+              style={{ scaleY: prefersReducedMotion ? 1 : lineProgress }}
+            />
+          </div>
 
           <ol className="relative space-y-0">
             {processSteps.map((step, i) => (
-              <ProcessStepRow key={step.id} step={step} index={i} />
+              <ProcessStepRow
+                key={step.id}
+                step={step}
+                index={i}
+                total={processSteps.length}
+                lineProgress={lineProgress}
+              />
             ))}
           </ol>
         </div>
@@ -66,28 +67,35 @@ export function Process() {
 function ProcessStepRow({
   step,
   index,
+  total,
+  lineProgress,
 }: {
   step: (typeof processSteps)[number];
   index: number;
+  total: number;
+  lineProgress: MotionValue<number>;
 }) {
   const prefersReducedMotion = useReducedMotion();
+  const threshold = (index + 0.4) / total;
+
+  const stepOpacity = useTransform(lineProgress, (v) =>
+    prefersReducedMotion ? 1 : v >= threshold - 0.06 ? 1 : 0.25
+  );
 
   return (
     <motion.li
-      className="grid gap-4 border-b border-rule py-8 md:grid-cols-12 md:gap-8 md:py-10"
-      initial={prefersReducedMotion ? {} : { opacity: 0, x: -12 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+      className="grid gap-4 border-b border-rule/80 py-8 md:grid-cols-12 md:gap-8 md:py-10"
+      style={{ opacity: stepOpacity }}
     >
-      <div className="flex items-baseline gap-4 md:col-span-3">
-        <span className="label text-champagne">{step.number}</span>
-        <span className="hidden h-px flex-1 bg-rule md:block" aria-hidden="true" />
+      <div className="flex items-center gap-4 md:col-span-2 md:pl-2">
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-beige/60 text-xs font-medium text-champagne">
+          {step.number}
+        </span>
       </div>
       <div className="md:col-span-4">
         <h3 className="text-lg font-medium text-forest md:text-xl">{step.title}</h3>
       </div>
-      <p className="text-sm leading-relaxed text-muted md:col-span-5 md:text-base">
+      <p className="text-sm leading-relaxed text-muted md:col-span-6 md:text-base">
         {step.description}
       </p>
     </motion.li>

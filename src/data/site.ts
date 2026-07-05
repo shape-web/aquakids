@@ -112,22 +112,22 @@ export const capabilities: Capability[] = [
 
 export const processSteps: ProcessStep[] = [
   {
-    id: "analyse",
+    id: "idee",
     number: "01",
-    title: "Analyse",
-    description: "Ziele, Kontext und Anforderungen verstehen — die Grundlage jedes Entwurfs.",
+    title: "Idee",
+    description: "Vision, Ziele und Kontext klären — was soll das Produkt leisten?",
   },
   {
-    id: "struktur",
+    id: "konzept",
     number: "02",
-    title: "Struktur",
-    description: "Informationsarchitektur, Abläufe und technische Basis definieren.",
+    title: "Konzept",
+    description: "Struktur, User Flows und technische Richtung definieren.",
   },
   {
-    id: "gestaltung",
+    id: "design",
     number: "03",
-    title: "Gestaltung",
-    description: "Visuelles Konzept, Typografie und Interaktion entwickeln.",
+    title: "Design",
+    description: "Interface, Typografie und Interaktion — visuell und funktional.",
   },
   {
     id: "entwicklung",

@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { projects } from "@/data/site";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { FadeIn } from "@/components/ui/FadeIn";
@@ -21,15 +22,13 @@ export function Work() {
           <SectionHeading
             label="Selected Projects"
             title="Ausgewählte Arbeiten"
-            description="Digitale Projekte — konzipiert, gestaltet und entwickelt wie architektonische Entwürfe."
+            description="Digitale Produkte — konzipiert, gestaltet und entwickelt."
           />
         </FadeIn>
 
-        <div className="space-y-16 md:space-y-24">
+        <div className="space-y-24 md:space-y-32">
           {projects.map((project, index) => (
-            <FadeIn key={project.id} delay={index * 0.08}>
-              <ProjectCase project={project} reversed={index % 2 === 1} />
-            </FadeIn>
+            <ProjectCase key={project.id} project={project} index={index} />
           ))}
         </div>
       </div>
@@ -39,73 +38,80 @@ export function Work() {
 
 function ProjectCase({
   project,
-  reversed,
+  index,
 }: {
   project: (typeof projects)[number];
-  reversed: boolean;
+  index: number;
 }) {
+  const ref = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
 
-  return (
-    <article className="group">
-      <div
-        className={`grid items-center gap-8 md:grid-cols-12 md:gap-12 ${
-          reversed ? "md:[direction:rtl]" : ""
-        }`}
-      >
-        <div className={`md:col-span-5 ${reversed ? "md:[direction:ltr]" : ""}`}>
-          <p className="label text-champagne">{project.number}</p>
-          <h3 className="display-md mt-3 text-forest">
-            {project.title}
-          </h3>
-          <p className="label mt-4 text-sage">{project.category}</p>
-          <p className="mt-4 text-base leading-relaxed text-muted">
-            {project.description}
-          </p>
-          <div className="mt-6 flex flex-wrap gap-2">
-            {project.tags.slice(0, 4).map((tag) => (
-              <span
-                key={tag}
-                className="rounded-sm border border-rule bg-beige/40 px-3 py-1 text-xs text-forest"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-forest transition-colors hover:text-champagne"
-          >
-            Projekt ansehen
-            <span aria-hidden="true">→</span>
-          </a>
-        </div>
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "center center"],
+  });
 
-        <motion.div
-          className={`relative overflow-hidden rounded-sm border border-rule bg-beige/30 md:col-span-7 ${
-            reversed ? "md:[direction:ltr]" : ""
-          }`}
-          whileHover={prefersReducedMotion ? {} : { y: -4 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+  const imageY = useTransform(scrollYProgress, [0, 1], [20, -6]);
+
+  return (
+    <motion.article
+      ref={ref}
+      className="group"
+      initial={prefersReducedMotion ? {} : { opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.65, delay: index * 0.04, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <span className="label text-champagne">{project.number}</span>
+          <h3 className="display-md mt-2 text-forest">{project.title}</h3>
+          <p className="mt-2 text-sm text-sage">{project.category}</p>
+        </div>
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm text-muted transition-colors hover:text-champagne"
         >
+          Live ansehen ↗
+        </a>
+      </div>
+
+      <motion.div
+        className="relative overflow-hidden rounded-xl bg-beige/30 p-2 shadow-[0_24px_48px_-20px_rgba(16,35,29,0.15)] md:p-3"
+        style={{ y: prefersReducedMotion ? 0 : imageY }}
+        whileHover={prefersReducedMotion ? {} : { y: -4 }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <div className="overflow-hidden rounded-lg bg-ivory">
           {project.previewImage && (
             <Image
               src={project.previewImage}
-              alt={`Screenshot: ${project.title}`}
-              width={1200}
-              height={750}
+              alt={`${project.title} — Projektvorschau`}
+              width={1400}
+              height={875}
               className="aspect-[16/10] w-full object-cover object-top"
-              sizes="(max-width: 768px) 100vw, 60vw"
+              sizes="(max-width: 768px) 100vw, 1152px"
             />
           )}
-          <div
-            className="pointer-events-none absolute inset-0 border border-forest/5"
-            aria-hidden="true"
-          />
-        </motion.div>
+        </div>
+      </motion.div>
+
+      <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted">
+        {project.description}
+      </p>
+
+      <div className="mt-5 flex flex-wrap gap-2">
+        {project.tags.slice(0, 4).map((tag) => (
+          <span
+            key={tag}
+            className="rounded-full border border-rule bg-ivory px-3 py-1 text-xs text-forest"
+          >
+            {tag}
+          </span>
+        ))}
       </div>
-    </article>
+    </motion.article>
   );
 }
