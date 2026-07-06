@@ -5,6 +5,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { BubbleCard } from "@/components/ui/BubbleCard";
 import { BubbleBadge } from "@/components/ui/BubbleBadge";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { LocationMap } from "./LocationMap";
 
 export function Location() {
   const details = [
@@ -31,20 +32,36 @@ export function Location() {
           />
         </FadeIn>
 
-        <FadeIn delay={0.1}>
-          <BubbleCard className="max-w-2xl">
-            <div className="flex flex-wrap gap-3">
-              {details.map((item) => (
-                <BubbleBadge
-                  key={item.label}
-                  label={item.label}
-                  value={item.value}
-                  className="min-w-[9rem] flex-1"
-                />
-              ))}
-            </div>
-          </BubbleCard>
-        </FadeIn>
+        <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
+          <FadeIn delay={0.1}>
+            <BubbleCard className="h-full">
+              <h3 className="text-lg font-bold tracking-tight text-ocean-deep">
+                Anfahrt & Kursort
+              </h3>
+              <div className="mt-5 flex flex-col gap-3">
+                {details.map((item) => (
+                  <BubbleBadge
+                    key={item.label}
+                    label={item.label}
+                    value={item.value}
+                    className="w-full"
+                  />
+                ))}
+              </div>
+            </BubbleCard>
+          </FadeIn>
+
+          <FadeIn delay={0.15}>
+            <BubbleCard className="h-full">
+              <h3 className="text-lg font-bold tracking-tight text-ocean-deep">
+                Karte
+              </h3>
+              <div className="mt-5">
+                <LocationMap />
+              </div>
+            </BubbleCard>
+          </FadeIn>
+        </div>
       </div>
     </section>
   );

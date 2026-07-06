@@ -40,13 +40,10 @@ export const OCEAN_SEAWEED = [
   { src: "/ocean/plants/seaweed-06.svg", width: 75, left: "88%", delay: 2 },
 ] as const;
 
-export const OCEAN_FLOOR = [
-  { src: "/ocean/animals/starfish.svg", width: 56, left: "18%", bottom: "8%" },
-  { src: "/ocean/animals/shell-01.svg", width: 48, left: "35%", bottom: "5%" },
-  { src: "/ocean/animals/shell-02.svg", width: 44, left: "55%", bottom: "6%" },
-  { src: "/ocean/animals/snail.svg", width: 40, left: "72%", bottom: "7%" },
-  { src: "/ocean/animals/crab-01.svg", width: 64, left: "82%", bottom: "4%" },
-] as const;
+export const OCEAN_CRAB = {
+  src: "/ocean/animals/crab-01.svg",
+  width: 64,
+} as const;
 
 export const BUBBLE_CONFIG = Array.from({ length: 18 }, (_, i) => ({
   id: i,

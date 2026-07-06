@@ -6,7 +6,9 @@ import { BubbleLayer } from "./BubbleLayer";
 import { FishLayer } from "./FishLayer";
 import { DiscoveryLayer } from "./DiscoveryLayer";
 import { HeroJellyfish } from "./HeroJellyfish";
+import { HeroOctopus } from "./HeroOctopus";
 import { DecorationLayer } from "./DecorationLayer";
+import { CrabWalker } from "./CrabWalker";
 
 export function OceanWorld() {
   const { scrollYProgress } = useScroll();
@@ -19,9 +21,11 @@ export function OceanWorld() {
       <GradientBackground scroll={scrollYProgress} />
       <BubbleLayer />
       <HeroJellyfish />
+      <HeroOctopus />
       <DiscoveryLayer scroll={scrollYProgress} />
       <FishLayer scroll={scrollYProgress} />
       <DecorationLayer scroll={scrollYProgress} />
+      <CrabWalker />
     </div>
   );
 }

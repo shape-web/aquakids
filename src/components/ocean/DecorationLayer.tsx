@@ -3,7 +3,7 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import { motion, useTransform, type MotionValue } from "framer-motion";
-import { OCEAN_FLOOR, OCEAN_SEAWEED } from "./oceanConfig";
+import { OCEAN_SEAWEED } from "./oceanConfig";
 
 type DecorationLayerProps = {
   scroll: MotionValue<number>;
@@ -44,28 +44,12 @@ export function DecorationLayer({ scroll }: DecorationLayerProps) {
         ))}
       </motion.div>
 
-      {/* Floor decorations */}
+      {/* Seafloor gradient */}
       <motion.div
         className="absolute inset-x-0 bottom-0 h-32"
         style={{ opacity: floorOpacity }}
       >
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-ocean-floor/80 to-transparent" />
-        {OCEAN_FLOOR.map((item) => (
-          <div
-            key={item.src}
-            className="absolute"
-            style={{ left: item.left, bottom: item.bottom }}
-          >
-            <Image
-              src={item.src}
-              alt=""
-              width={item.width}
-              height={item.width}
-              className="h-auto"
-              style={{ width: item.width, height: "auto" }}
-            />
-          </div>
-        ))}
       </motion.div>
     </div>
   );

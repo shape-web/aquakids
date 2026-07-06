@@ -34,7 +34,7 @@ export function Team() {
                       alt={member.name}
                       fill
                       className="object-cover object-top"
-                      sizes="112px"
+                      sizes="136px"
                     />
                   </div>
                 </div>

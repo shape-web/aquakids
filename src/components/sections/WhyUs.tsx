@@ -22,7 +22,7 @@ export function WhyUs() {
           />
         </FadeIn>
 
-        <StaggerContainer className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+        <StaggerContainer className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {whyUsItems.map((item) => (
             <StaggerItem key={item.title}>
               <BubbleCard className="h-full">

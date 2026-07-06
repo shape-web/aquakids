@@ -96,6 +96,10 @@ export const whyUsItems = [
     title: "Sicherheit",
     description: "Qualifizierte Trainer, klare Regeln und eine liebevoll gestaltete Umgebung.",
   },
+  {
+    title: "Eltern-Transparenz",
+    description: "Klare Kommunikation über Fortschritte, Kursziele und nächste Schritte.",
+  },
 ];
 
 export const processSteps = [
@@ -140,6 +144,8 @@ export const locationInfo = {
   parking: "Parkmöglichkeiten direkt am Schwimmbad",
   meeting: "Eingangsbereich / Kursbereich Schwimmschule",
   hours: "Mo–Fr 15:00–18:00 Uhr, Sa 10:00–13:00 Uhr",
+  mapsUrl:
+    "https://www.google.com/maps/search/?api=1&query=HörnBad+Kiel+Anni-Wadle-Weg+1+24143+Kiel",
 };
 
 export const faqItems = [

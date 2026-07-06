@@ -9,13 +9,13 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative z-10 flex min-h-[100svh] flex-col justify-center overflow-hidden px-6 pb-16 pt-24 md:px-8 md:pb-20 md:pt-28"
+      className="relative z-10 flex min-h-[100svh] flex-col justify-center overflow-hidden px-6 pb-10 pt-24 md:px-8 md:pb-12 md:pt-28"
       aria-labelledby="hero-heading"
     >
       <HeroSurface />
 
       <div className="relative z-10 mx-auto w-full max-w-6xl">
-        <div className="max-w-xl lg:max-w-2xl">
+        <div className="max-w-xl text-left lg:max-w-2xl">
           <FadeIn>
             <p className="section-label section-label-surface">Kinderschwimmschule</p>
           </FadeIn>

@@ -324,9 +324,9 @@ body {
 .bubble-avatar {
   position: relative;
   margin-inline: auto;
-  width: 7rem;
-  height: 7rem;
-  padding: 0.25rem;
+  width: 8.5rem;
+  height: 8.5rem;
+  padding: 0.3rem;
   border-radius: 9999px;
   background: linear-gradient(
     145deg,
@@ -452,9 +452,21 @@ body {
   66% { transform: translate3d(-8px, -20px, 0); }
 }
 
+@keyframes hero-octopus-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-2deg); }
+  33% { transform: translate3d(2px, -7px, 0) rotate(3deg); }
+  66% { transform: translate3d(-2px, 5px, 0) rotate(-1deg); }
+}
+
 @keyframes octopus-peek {
   0%, 100% { transform: translateY(5px); }
   50% { transform: translateY(-4px); }
+}
+
+@keyframes crab-walk {
+  0%, 100% { transform: translateY(6px) rotate(0deg); }
+  25% { transform: translateY(2px) rotate(-3deg); }
+  75% { transform: translateY(4px) rotate(3deg); }
 }
 
 .ocean-bubble {
@@ -502,9 +514,21 @@ body {
   will-change: transform;
 }
 
+.hero-octopus-drift {
+  animation: hero-octopus-drift 2.8s ease-in-out infinite;
+  transform-origin: center center;
+  will-change: transform;
+}
+
 .ocean-octopus {
   animation: octopus-peek var(--octopus-duration, 9s) ease-in-out infinite;
   animation-delay: var(--octopus-delay, 0s);
+  transform-origin: center bottom;
+  will-change: transform;
+}
+
+.ocean-crab-walk {
+  animation: crab-walk 0.55s ease-in-out infinite;
   transform-origin: center bottom;
   will-change: transform;
 }
@@ -565,6 +589,8 @@ body {
   .pool-info-float,
   .ocean-jellyfish,
   .ocean-octopus,
+  .hero-octopus-drift,
+  .ocean-crab-walk,
   .course-icon-float,
   .ocean-scene-bubble {
     animation: none !important;

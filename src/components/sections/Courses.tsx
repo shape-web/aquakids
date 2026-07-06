@@ -15,7 +15,7 @@ export function Courses() {
   return (
     <section
       id="kurse"
-      className="relative z-10 px-6 py-20 md:px-8 md:py-28"
+      className="relative z-10 px-6 pb-20 pt-14 md:px-8 md:pb-28 md:pt-16"
       aria-labelledby="kurse-heading"
     >
       <div className="mx-auto max-w-6xl">
