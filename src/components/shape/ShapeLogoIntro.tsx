@@ -1,40 +1,47 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
-import { animate, useReducedMotion } from "framer-motion";
-import { useMounted } from "@/lib/useMounted";
+import { motion } from "framer-motion";
 import {
   SHAPE_LOGO_ANIMATED_VIEWBOX,
   shapeLogoAnimatedPaths,
 } from "./shapeLogoAnimatedPaths";
-
-const EASE = [0.22, 1, 0.36, 1] as const;
-const LETTER_DURATION = 0.36;
+import {
+  SHAPE_LOGO_INTRO_EASE,
+  SHAPE_LOGO_INTRO_TIMING,
+  SHAPE_LOGO_LETTER_DELAYS,
+} from "./shapeLogoIntroTiming";
 
 const LETTER_SEQUENCE = [
-  { id: "letter-s", delay: 0, group: false as const, ...shapeLogoAnimatedPaths.letterS },
-  { id: "letter-h", delay: 0.22, group: false as const, ...shapeLogoAnimatedPaths.letterH },
-  { id: "letter-a", delay: 0.44, group: false as const, ...shapeLogoAnimatedPaths.letterA },
-  { id: "letter-p", delay: 0.66, group: true as const, ...shapeLogoAnimatedPaths.letterP },
-  { id: "letter-e", delay: 0.88, group: false as const, ...shapeLogoAnimatedPaths.letterE },
+  { id: "letter-s", group: false as const, ...shapeLogoAnimatedPaths.letterS },
+  { id: "letter-h", group: false as const, ...shapeLogoAnimatedPaths.letterH },
+  { id: "letter-a", group: false as const, ...shapeLogoAnimatedPaths.letterA },
+  { id: "letter-p", group: true as const, ...shapeLogoAnimatedPaths.letterP },
+  { id: "letter-e", group: false as const, ...shapeLogoAnimatedPaths.letterE },
 ] as const;
 
 const SUBTITLE = {
   id: "subtitle",
-  delay: 1.15,
-  duration: 0.45,
   ...shapeLogoAnimatedPaths.subtitle,
 } as const;
 
-type ShapeLogoIntroProps = {
-  className?: string;
+const letterTransition = (delay: number) => ({
+  delay,
+  duration: SHAPE_LOGO_INTRO_TIMING.LETTER_DURATION,
+  ease: SHAPE_LOGO_INTRO_EASE,
+});
+
+const subtitleTransition = {
+  delay: SHAPE_LOGO_INTRO_TIMING.SUBTITLE_DELAY,
+  duration: SHAPE_LOGO_INTRO_TIMING.SUBTITLE_DURATION,
+  ease: SHAPE_LOGO_INTRO_EASE,
 };
 
-export function ShapeLogoIntro({ className }: ShapeLogoIntroProps) {
-  const prefersReducedMotion = useReducedMotion();
-  const mounted = useMounted();
-  const skipIntro = !mounted || Boolean(prefersReducedMotion);
+type ShapeLogoIntroProps = {
+  className?: string;
+  playIntro: boolean;
+};
 
+export function ShapeLogoIntro({ className, playIntro }: ShapeLogoIntroProps) {
   return (
     <svg
       viewBox={SHAPE_LOGO_ANIMATED_VIEWBOX}
@@ -43,17 +50,18 @@ export function ShapeLogoIntro({ className }: ShapeLogoIntroProps) {
       className={className}
       aria-label="shape — Digitale Architektur"
       role="img"
+      preserveAspectRatio="xMidYMid meet"
     >
       <g id="shape_logo_primary">
-        {LETTER_SEQUENCE.map((letter) =>
+        {LETTER_SEQUENCE.map((letter, index) =>
           letter.group ? (
             <AnimatedLetterGroup
               key={letter.id}
               id={letter.id}
               d={letter.d}
               fill={letter.fill}
-              delay={letter.delay}
-              skipIntro={skipIntro}
+              delay={SHAPE_LOGO_LETTER_DELAYS[index]}
+              playIntro={playIntro}
             />
           ) : (
             <AnimatedLetterPath
@@ -61,8 +69,8 @@ export function ShapeLogoIntro({ className }: ShapeLogoIntroProps) {
               id={letter.id}
               d={letter.d}
               fill={letter.fill}
-              delay={letter.delay}
-              skipIntro={skipIntro}
+              delay={SHAPE_LOGO_LETTER_DELAYS[index]}
+              playIntro={playIntro}
             />
           )
         )}
@@ -71,10 +79,9 @@ export function ShapeLogoIntro({ className }: ShapeLogoIntroProps) {
           id={SUBTITLE.id}
           d={SUBTITLE.d}
           fill={SUBTITLE.fill}
-          delay={SUBTITLE.delay}
-          duration={SUBTITLE.duration}
-          skipIntro={skipIntro}
-          subtle
+          delay={SHAPE_LOGO_INTRO_TIMING.SUBTITLE_DELAY}
+          playIntro={playIntro}
+          variant="subtitle"
         />
       </g>
     </svg>
@@ -86,9 +93,8 @@ type AnimatedLetterProps = {
   d: string;
   fill: string;
   delay: number;
-  skipIntro: boolean;
-  duration?: number;
-  subtle?: boolean;
+  playIntro: boolean;
+  variant?: "letter" | "subtitle";
 };
 
 function AnimatedLetterPath({
@@ -96,35 +102,32 @@ function AnimatedLetterPath({
   d,
   fill,
   delay,
-  skipIntro,
-  duration = LETTER_DURATION,
-  subtle = false,
+  playIntro,
+  variant = "letter",
 }: AnimatedLetterProps) {
-  const ref = useRef<SVGPathElement>(null);
-  const lift = subtle ? 3 : 5;
+  if (!playIntro) {
+    return <path id={id} d={d} fill={fill} />;
+  }
 
-  useLayoutEffect(() => {
-    const node = ref.current;
-    if (skipIntro || !node) return;
-
-    const controls = animate(
-      node,
-      { opacity: [0, 1], y: [lift, 0] },
-      { delay, duration, ease: EASE }
-    );
-    return () => controls.stop();
-  }, [delay, duration, lift, skipIntro]);
+  const isSubtitle = variant === "subtitle";
 
   return (
-    <path
-      ref={ref}
+    <motion.path
       id={id}
       d={d}
       fill={fill}
-      style={{
-        opacity: skipIntro ? 1 : 0,
-        transform: skipIntro ? undefined : `translateY(${lift}px)`,
-      }}
+      initial={
+        isSubtitle
+          ? { opacity: 0, y: 8, filter: "blur(6px)" }
+          : { opacity: 0, y: 14, scale: 0.92, filter: "blur(10px)" }
+      }
+      animate={
+        isSubtitle
+          ? { opacity: 1, y: 0, filter: "blur(0px)" }
+          : { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }
+      }
+      transition={isSubtitle ? subtitleTransition : letterTransition(delay)}
+      style={{ transformOrigin: "center", transformBox: "fill-box" }}
     />
   );
 }
@@ -134,33 +137,25 @@ function AnimatedLetterGroup({
   d,
   fill,
   delay,
-  skipIntro,
-}: Omit<AnimatedLetterProps, "subtle" | "duration">) {
-  const ref = useRef<SVGGElement>(null);
-  const lift = 5;
-
-  useLayoutEffect(() => {
-    const node = ref.current;
-    if (skipIntro || !node) return;
-
-    const controls = animate(
-      node,
-      { opacity: [0, 1], y: [lift, 0] },
-      { delay, duration: LETTER_DURATION, ease: EASE }
+  playIntro,
+}: Omit<AnimatedLetterProps, "variant">) {
+  if (!playIntro) {
+    return (
+      <g id={id}>
+        <path id="Subtract" d={d} fill={fill} />
+      </g>
     );
-    return () => controls.stop();
-  }, [delay, lift, skipIntro]);
+  }
 
   return (
-    <g
-      ref={ref}
+    <motion.g
       id={id}
-      style={{
-        opacity: skipIntro ? 1 : 0,
-        transform: skipIntro ? undefined : `translateY(${lift}px)`,
-      }}
+      initial={{ opacity: 0, y: 14, scale: 0.92, filter: "blur(10px)" }}
+      animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+      transition={letterTransition(delay)}
+      style={{ transformOrigin: "center", transformBox: "fill-box" }}
     >
       <path id="Subtract" d={d} fill={fill} />
-    </g>
+    </motion.g>
   );
 }
