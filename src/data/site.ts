@@ -1,150 +1,178 @@
-export type PortfolioProject = {
-  id: string;
-  number: string;
-  title: string;
-  category: string;
-  description: string;
-  tags: string[];
-  url: string;
-  previewImage?: string;
-};
-
-export type Capability = {
-  id: string;
-  title: string;
-  description: string;
-};
-
-export type ProcessStep = {
-  id: string;
-  number: string;
-  title: string;
-  description: string;
-};
-
 export const siteConfig = {
-  name: "shape",
-  tagline: "DIGITALE ARCHITEKTUR",
-  title: "shape — Digitale Architektur",
+  name: "AquaKids",
+  tagline: "Dive Deeper",
+  title: "AquaKids — Schwimmschule für Kinder",
   description:
-    "Digitale Räume, geformt aus Ideen. Websites, Web Apps und Progressive Web Apps — präzise gestaltet und technisch umgesetzt von shape.",
-  url: "https://sebastianhappe.de",
-  email: "hello@sebastianhappe.de",
-  ogImage: "/shape_logo_primary@4x.png",
+    "Spielerische Schwimmkurse für Kinder – mit Geduld, Erfahrung und ganz viel Spaß am Wasser. Kleine Gruppen, erfahrene Trainer, sichere Umgebung.",
+  url: "https://aquakids.example.de",
+  email: "hallo@aquakids.de",
+  phone: "+49 30 123 456 78",
+  ogImage: "/ocean/objects/buoy-duck.svg",
 };
 
 export const navLinks = [
-  { href: "#work", label: "Projekte" },
-  { href: "#capabilities", label: "Leistungen" },
-  { href: "#process", label: "Prozess" },
-  { href: "#about", label: "Studio" },
-  { href: "#contact", label: "Kontakt" },
+  { href: "#kurse", label: "Kurse" },
+  { href: "#warum-wir", label: "Warum wir" },
+  { href: "#ablauf", label: "Ablauf" },
+  { href: "#team", label: "Team" },
+  { href: "#faq", label: "FAQ" },
+  { href: "#kontakt", label: "Kontakt" },
 ];
 
-export const projects: PortfolioProject[] = [
-  {
-    id: "anslik-brandschutz",
-    number: "01",
-    title: "Anslik Brandschutz",
-    category: "Unternehmenswebsite",
-    description:
-      "Konzeption, Design und Entwicklung einer modernen Unternehmenswebsite mit klarer Informationsarchitektur und vertrauenswürdiger Markenwirkung.",
-    tags: ["Next.js", "Responsive", "SEO", "Corporate"],
-    url: "https://anslik-brandschutz.pages.dev/",
-    previewImage: "/projects/Anslik_Brandschutz.png",
-  },
-  {
-    id: "coachpilot-ai",
-    number: "02",
-    title: "CoachPilot AI",
-    category: "Progressive Web App",
-    description:
-      "KI-gestützte PWA für Fahrer und Unternehmen — Mobile First, installierbar und für den täglichen Einsatz entwickelt.",
-    tags: ["AI", "PWA", "TypeScript", "Mobile First"],
-    url: "https://coachpilot-ai.pages.dev/",
-    previewImage: "/projects/CoachPilotAI.png",
-  },
-  {
-    id: "moodpop",
-    number: "03",
-    title: "MoodPop",
-    category: "Interactive Experience",
-    description:
-      "Interaktive Web-App mit KI-generierten Inhalten, Animationen und spielerischer Benutzerführung.",
-    tags: ["AI", "Interactive", "Animations", "Frontend"],
-    url: "https://moodpop.pages.dev/",
-    previewImage: "/projects/Mood_Critters.png",
-  },
-];
+export const trustPoints = [
+  "kleine Gruppen",
+  "erfahrene Schwimmtrainer",
+  "spielerisches Lernen",
+  "sichere Umgebung",
+] as const;
 
-export const capabilities: Capability[] = [
+export const poolInfo = {
+  message: "Neue Anfängergruppen ab August verfügbar",
+  altMessages: [
+    "Ferienpause vom 12.07.–28.07.",
+    "Alle Kurse laufen regulär",
+  ],
+} as const;
+
+export type Course = {
+  id: string;
+  icon: string;
+  title: string;
+  age?: string;
+  description: string;
+  goal?: string;
+};
+
+export const courses: Course[] = [
   {
-    id: "websites",
-    title: "Websites",
-    description:
-      "Individuelle Websites mit klarer Struktur, hochwertiger Gestaltung und schneller Performance.",
+    id: "wassergewoehnung",
+    icon: "/ocean/animals/starfish.svg",
+    title: "Wassergewöhnung",
+    age: "2–4 Jahre",
+    description: "Spielerischer Einstieg ins Wasser.",
+    goal: "Vertrauen zum Wasser entwickeln",
   },
   {
-    id: "web-apps",
-    title: "Web Apps",
-    description:
-      "Interaktive Anwendungen, Kundenbereiche und digitale Tools — direkt im Browser.",
+    id: "anfaenger",
+    icon: "/ocean/animals/fish-01.svg",
+    title: "Anfänger",
+    description: "Erste Schwimmbewegungen und Wassersicherheit.",
+    goal: "Vorbereitung Seepferdchen",
   },
   {
-    id: "pwa",
-    title: "Progressive Web Apps",
-    description:
-      "Installierbare, offlinefähige Lösungen für mobile und stationäre Nutzung.",
+    id: "fortgeschritten",
+    icon: "/ocean/animals/fish-04.svg",
+    title: "Fortgeschritten",
+    description: "Technik vertiefen und Ausdauer aufbauen.",
+    goal: "Sicherer schwimmen",
   },
   {
-    id: "ui-ux",
-    title: "UI/UX Design",
-    description:
-      "Durchdachte Oberflächen, Nutzerführung und visuelle Systeme bis ins Detail.",
-  },
-  {
-    id: "ai",
-    title: "KI-Integration",
-    description:
-      "Intelligente Funktionen, Automatisierungen und smarte Workflows in digitalen Produkten.",
+    id: "einzeltraining",
+    icon: "/ocean/animals/fish-06.svg",
+    title: "Einzeltraining",
+    description: "Individuelle Förderung mit persönlichem Trainer.",
+    goal: "Persönliche Förderung",
   },
 ];
 
-export const processSteps: ProcessStep[] = [
+export const whyUsItems = [
   {
-    id: "idee",
-    number: "01",
-    title: "Idee",
-    description: "Vision, Ziele und Kontext klären — was soll das Produkt leisten?",
+    title: "Kleine Gruppen",
+    description: "Maximal 6 Kinder pro Kurs – damit jedes Kind die Aufmerksamkeit bekommt, die es verdient.",
   },
   {
-    id: "konzept",
-    number: "02",
-    title: "Konzept",
-    description: "Struktur, User Flows und technische Richtung definieren.",
+    title: "Individuelle Betreuung",
+    description: "Jedes Kind lernt in seinem eigenen Tempo. Wir passen uns an, nicht umgekehrt.",
   },
   {
-    id: "design",
-    number: "03",
-    title: "Design",
-    description: "Interface, Typografie und Interaktion — visuell und funktional.",
+    title: "Geduld statt Druck",
+    description: "Kein Zeitdruck, keine Vergleiche. Vertrauen entsteht durch Geduld und positive Erfahrungen.",
   },
   {
-    id: "entwicklung",
-    number: "04",
-    title: "Entwicklung",
-    description: "Sauberer Code, Performance und Accessibility von Anfang an.",
+    title: "Spielerische Methode",
+    description: "Spiele, Lieder und kleine Abenteuer machen das Lernen zum Erlebnis.",
   },
   {
-    id: "launch",
-    number: "05",
-    title: "Launch",
-    description: "Deployment, Testing und Übergabe des fertigen Produkts.",
-  },
-  {
-    id: "betreuung",
-    number: "06",
-    title: "Betreuung",
-    description: "Weiterentwicklung, Pflege und technische Unterstützung.",
+    title: "Sicherheit",
+    description: "Qualifizierte Trainer, klare Regeln und eine liebevoll gestaltete Umgebung.",
   },
 ];
+
+export const processSteps = [
+  { number: "01", title: "Kurs auswählen", description: "Passenden Kurs nach Alter und Level finden." },
+  { number: "02", title: "Anmeldung", description: "Einfach online oder telefonisch anmelden." },
+  { number: "03", title: "Erste Schwimmstunde", description: "Spielerisch und ohne Druck ins Wasser." },
+  { number: "04", title: "Fortschritte sammeln", description: "Schritt für Schritt mehr Sicherheit gewinnen." },
+  { number: "05", title: "Schwimmabzeichen", description: "Seepferdchen & Co. mit Stolz erreichen." },
+];
+
+export type TeamMember = {
+  name: string;
+  role: string;
+  bio: string;
+  image: string;
+};
+
+export const teamMembers: TeamMember[] = [
+  {
+    name: "Sarah Müller",
+    role: "Schwimmtrainerin & Gründerin",
+    bio: "15 Jahre Erfahrung mit Kindern im Wasser. Ihre Geduld ist legendär.",
+    image: "/team/sarah-mueller.png",
+  },
+  {
+    name: "Tom Weber",
+    role: "Schwimmtrainer",
+    bio: "Ehemaliger Leistungsschwimmer, heute mit Herz für die Kleinsten.",
+    image: "/team/tom-weber.png",
+  },
+  {
+    name: "Lisa Hoffmann",
+    role: "Wassergewöhnung",
+    bio: "Spezialisiert auf die jüngsten Wasserfans ab 2 Jahren.",
+    image: "/team/lisa-hoffmann.png",
+  },
+];
+
+export const locationInfo = {
+  name: "HörnBad Kiel",
+  address: "Anni-Wadle-Weg 1, 24143 Kiel",
+  parking: "Parkmöglichkeiten direkt am Schwimmbad",
+  meeting: "Eingangsbereich / Kursbereich Schwimmschule",
+  hours: "Mo–Fr 15:00–18:00 Uhr, Sa 10:00–13:00 Uhr",
+};
+
+export const faqItems = [
+  {
+    question: "Was muss mein Kind mitbringen?",
+    answer: "Badekleidung, Handtuch, Badeschuhe und eine Wasserflasche. Schwimmbrille ist optional.",
+  },
+  {
+    question: "Dürfen Eltern zuschauen?",
+    answer: "Ja, aus der Zuschauergalerie. Für manche Übungen bitten wir um etwas Abstand – das hilft den Kindern.",
+  },
+  {
+    question: "Was passiert bei Krankheit?",
+    answer: "Krankgemeldete Stunden können nach Absprache in einem anderen Kurs nachgeholt werden.",
+  },
+  {
+    question: "Kann eine Stunde nachgeholt werden?",
+    answer: "Ja, innerhalb von 4 Wochen in einer parallel laufenden Gruppe.",
+  },
+  {
+    question: "Ab welchem Alter?",
+    answer: "Wassergewöhnung ab 2 Jahren, Schwimmkurse ab ca. 4 Jahren.",
+  },
+  {
+    question: "Braucht mein Kind Schwimmhilfen?",
+    answer: "Am Anfang ja – wir stellen Schwimmflügel und Boards zur Verfügung.",
+  },
+];
+
+export const courseOptions = [
+  "Wassergewöhnung (2–4 Jahre)",
+  "Anfänger",
+  "Fortgeschritten",
+  "Einzeltraining",
+  "Noch unsicher",
+] as const;

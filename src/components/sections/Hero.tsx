@@ -1,92 +1,62 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
-import { ShapeLogoIntro } from "@/components/shape/ShapeLogoIntro";
-import {
-  SHAPE_LOGO_INTRO_EASE,
-  SHAPE_LOGO_INTRO_TIMING,
-} from "@/components/shape/shapeLogoIntroTiming";
-import { useMounted } from "@/lib/useMounted";
-
-const LOGO_CLASS =
-  "block aspect-[600/182] h-auto w-full max-w-[min(100%,30rem)] lg:max-w-[36rem]";
+import { FadeIn } from "@/components/ui/FadeIn";
+import { HeroSurface } from "@/components/ocean/HeroSurface";
+import { trustPoints } from "@/data/site";
 
 export function Hero() {
-  const prefersReducedMotion = useReducedMotion();
-  const mounted = useMounted();
-  const playIntro = mounted && !Boolean(prefersReducedMotion);
-
   return (
     <section
       id="hero"
-      className="relative flex min-h-[92svh] flex-col justify-center overflow-hidden pt-24 pb-10 md:pt-28 md:pb-14"
+      className="relative z-10 flex min-h-[100svh] flex-col justify-center overflow-hidden px-6 pb-16 pt-24 md:px-8 md:pb-20 md:pt-28"
       aria-labelledby="hero-heading"
     >
-      <div className="relative mx-auto mt-8 grid w-full max-w-6xl items-center gap-12 px-6 md:mt-10 md:grid-cols-2 md:gap-16 md:px-8 lg:gap-20">
-        <HeroContent key={playIntro ? "intro" : "static"} playIntro={playIntro} />
+      <HeroSurface />
 
-        <div className="flex w-full items-center justify-center md:justify-end">
-          <div className="-translate-y-10 md:-translate-y-[50px] md:translate-x-10">
-            <ShapeLogoIntro playIntro={playIntro} className={LOGO_CLASS} />
-          </div>
+      <div className="relative z-10 mx-auto w-full max-w-6xl">
+        <div className="max-w-xl lg:max-w-2xl">
+          <FadeIn>
+            <p className="section-label section-label-surface">Kinderschwimmschule</p>
+          </FadeIn>
+
+          <FadeIn delay={0.1}>
+            <h1 id="hero-heading" className="display-hero mt-3 text-ocean-deep">
+              Schwimmen lernen mit{" "}
+              <span className="text-accent-surface">Freude</span> und Sicherheit
+            </h1>
+          </FadeIn>
+
+          <FadeIn delay={0.2}>
+            <p className="mt-5 text-lg leading-relaxed text-ocean-deep/85 md:text-xl">
+              Spielerische Schwimmkurse für Kinder – mit Geduld, Erfahrung und
+              ganz viel Spaß am Wasser.
+            </p>
+          </FadeIn>
+
+          <FadeIn delay={0.3}>
+            <ul className="mt-7 grid gap-2.5 sm:grid-cols-2">
+              {trustPoints.map((point) => (
+                <li key={point} className="trust-pill">
+                  <span className="trust-pill-check" aria-hidden="true">
+                    ✓
+                  </span>
+                  <span className="trust-pill-text">{point}</span>
+                </li>
+              ))}
+            </ul>
+          </FadeIn>
+
+          <FadeIn delay={0.4}>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Button href="#kurse">Kurs finden</Button>
+              <Button href="#warum-wir" variant="secondary">
+                Mehr erfahren
+              </Button>
+            </div>
+          </FadeIn>
         </div>
       </div>
     </section>
-  );
-}
-
-function HeroContent({ playIntro }: { playIntro: boolean }) {
-  const { CONTENT_DELAY, CONTENT_STAGGER } = SHAPE_LOGO_INTRO_TIMING;
-
-  const fadeUp = (delay: number) =>
-    playIntro
-      ? {
-          initial: { opacity: 0, y: 20 },
-          animate: { opacity: 1, y: 0 },
-          transition: { delay, duration: 0.7, ease: SHAPE_LOGO_INTRO_EASE },
-        }
-      : {
-          initial: false as const,
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0 },
-        };
-
-  return (
-    <div>
-      <motion.p className="label text-champagne" {...fadeUp(CONTENT_DELAY)}>
-        Studio
-      </motion.p>
-
-      <div className="mt-4 md:mt-6">
-        <motion.h1
-          id="hero-heading"
-          className="display-hero text-forest"
-          {...fadeUp(CONTENT_DELAY + CONTENT_STAGGER)}
-        >
-          Digitale Räume.
-          <br />
-          <span className="text-champagne">Geformt aus Ideen.</span>
-        </motion.h1>
-      </div>
-
-      <motion.p
-        className="mt-6 max-w-md text-base leading-relaxed text-muted md:mt-8 md:text-lg"
-        {...fadeUp(CONTENT_DELAY + CONTENT_STAGGER * 2)}
-      >
-        Creative Developer für Websites, Web Apps und digitale Produkte —
-        Design, Struktur und Code aus einer Hand.
-      </motion.p>
-
-      <motion.div
-        className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
-        {...fadeUp(CONTENT_DELAY + CONTENT_STAGGER * 3)}
-      >
-        <Button href="#work">Projekte ansehen</Button>
-        <Button href="#contact" variant="secondary">
-          Projekt starten
-        </Button>
-      </motion.div>
-    </div>
   );
 }

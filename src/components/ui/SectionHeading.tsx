@@ -1,11 +1,34 @@
 import { cn } from "@/lib/utils";
 
+export type SectionDepth = "surface" | "shallow" | "mid" | "deep";
+
 type SectionHeadingProps = {
   label?: string;
   title: string;
   description?: string;
   className?: string;
-  dark?: boolean;
+  depth?: SectionDepth;
+};
+
+const labelClass: Record<SectionDepth, string> = {
+  surface: "section-label-surface",
+  shallow: "section-label-shallow",
+  mid: "section-label-mid",
+  deep: "section-label-deep",
+};
+
+const titleClass: Record<SectionDepth, string> = {
+  surface: "text-ocean-deep",
+  shallow: "text-ocean-deep",
+  mid: "text-ocean-deep",
+  deep: "text-headline-deep",
+};
+
+const descriptionClass: Record<SectionDepth, string> = {
+  surface: "text-body-surface",
+  shallow: "text-body-shallow",
+  mid: "text-body-mid",
+  deep: "text-body-deep-water",
 };
 
 export function SectionHeading({
@@ -13,33 +36,19 @@ export function SectionHeading({
   title,
   description,
   className,
-  dark = false,
+  depth = "surface",
 }: SectionHeadingProps) {
   return (
-    <div className={cn("mb-12 md:mb-16", className)}>
+    <div className={cn("mb-10 md:mb-14", className)}>
       {label && (
-        <p
-          className={cn(
-            "label mb-4",
-            dark ? "text-champagne" : "text-champagne"
-          )}
-        >
-          {label}
-        </p>
+        <p className={cn("section-label mb-3", labelClass[depth])}>{label}</p>
       )}
-      <h2
-        className={cn(
-          "display-lg",
-          dark ? "text-ivory" : "text-forest"
-        )}
-      >
-        {title}
-      </h2>
+      <h2 className={cn("display-lg", titleClass[depth])}>{title}</h2>
       {description && (
         <p
           className={cn(
             "mt-4 max-w-xl text-base leading-relaxed md:text-lg",
-            dark ? "text-ivory/60" : "text-muted"
+            descriptionClass[depth]
           )}
         >
           {description}

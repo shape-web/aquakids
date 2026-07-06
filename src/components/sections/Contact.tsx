@@ -1,44 +1,126 @@
 "use client";
 
-import { siteConfig } from "@/data/site";
+import { useState } from "react";
+import { siteConfig, courseOptions } from "@/data/site";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { BubbleCard } from "@/components/ui/BubbleCard";
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/FadeIn";
 
 export function Contact() {
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
   return (
     <section
-      id="contact"
-      className="bg-forest-dark py-24 md:py-32"
-      aria-labelledby="contact-heading"
+      id="kontakt"
+      className="relative z-10 px-6 pb-32 pt-20 md:px-8 md:pb-40 md:pt-28"
+      aria-labelledby="kontakt-heading"
     >
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
+      <div className="mx-auto max-w-2xl">
         <FadeIn>
-          <p className="label text-champagne">Kontakt</p>
-          <h2
-            id="contact-heading"
-            className="display-lg mt-4 max-w-2xl text-ivory"
-          >
-            Der nächste Entwurf beginnt hier.
-          </h2>
-          <p className="mt-6 max-w-lg text-base leading-relaxed text-ivory/60 md:text-lg">
-            Aus Konzept wird Struktur. Erzählen Sie mir von Ihrem Projekt —
-            ich melde mich persönlich.
-          </p>
+          <SectionHeading
+            label="Kontakt"
+            title="Tauchen Sie ein"
+            description="Wir freuen uns auf Ihre Nachricht. Gemeinsam finden wir den passenden Kurs."
+            depth="deep"
+          />
+        </FadeIn>
 
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-            <Button
-              href={`mailto:${siteConfig.email}`}
-              className="bg-champagne text-forest-dark hover:bg-champagne/90"
-            >
-              {siteConfig.email}
-            </Button>
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="text-sm text-ivory/50 transition-colors hover:text-champagne"
-            >
-              Oder direkt schreiben →
-            </a>
-          </div>
+        <FadeIn delay={0.1}>
+          <BubbleCard>
+            {submitted ? (
+              <div className="py-8 text-center">
+                <p className="text-4xl" aria-hidden="true">
+                  🐬
+                </p>
+                <p className="mt-4 text-lg font-bold tracking-tight text-ocean-deep">
+                  Vielen Dank!
+                </p>
+                <p className="text-body-muted-deep mt-2 text-sm">
+                  Wir melden uns innerhalb von 24 Stunden bei Ihnen.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div>
+                  <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-ocean-deep">
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    className="bubble-input"
+                    placeholder="Ihr Name"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-ocean-deep">
+                    E-Mail
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    className="bubble-input"
+                    placeholder="ihre@email.de"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="age" className="mb-1.5 block text-sm font-medium text-ocean-deep">
+                    Alter Kind
+                  </label>
+                  <input
+                    id="age"
+                    name="age"
+                    type="text"
+                    className="bubble-input"
+                    placeholder="z.B. 4 Jahre"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="course" className="mb-1.5 block text-sm font-medium text-ocean-deep">
+                    Kursinteresse
+                  </label>
+                  <select id="course" name="course" className="bubble-input">
+                    {courseOptions.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-ocean-deep">
+                    Nachricht
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={4}
+                    className="bubble-input resize-none"
+                    placeholder="Ihre Nachricht…"
+                  />
+                </div>
+                <Button type="submit" className="w-full">
+                  Nachricht senden
+                </Button>
+                <p className="text-body-muted-deep text-center text-xs">
+                  Oder direkt:{" "}
+                  <a href={`mailto:${siteConfig.email}`} className="text-turquoise hover:underline">
+                    {siteConfig.email}
+                  </a>
+                </p>
+              </form>
+            )}
+          </BubbleCard>
         </FadeIn>
       </div>
     </section>

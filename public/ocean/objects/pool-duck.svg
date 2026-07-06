@@ -1,0 +1,23 @@
+<svg viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <!-- Water reflection on belly -->
+  <ellipse cx="78" cy="118" rx="42" ry="10" fill="#5BC0EB" opacity="0.22"/>
+  <!-- Body -->
+  <ellipse cx="72" cy="98" rx="52" ry="36" fill="#FFB703"/>
+  <ellipse cx="68" cy="104" rx="38" ry="24" fill="#E8A020" opacity="0.35"/>
+  <!-- Wing hint -->
+  <ellipse cx="48" cy="92" rx="18" ry="12" fill="#F9A825" opacity="0.45"/>
+  <!-- Head -->
+  <circle cx="98" cy="54" r="36" fill="#FFC93C"/>
+  <ellipse cx="86" cy="42" rx="16" ry="11" fill="#FFE08A" opacity="0.55"/>
+  <!-- Beak upper -->
+  <path d="M128 56 C148 58 152 66 140 72 C132 68 124 64 120 60 Z" fill="#FF8C42"/>
+  <!-- Beak lower shadow -->
+  <path d="M128 60 C140 66 136 72 124 68 C122 64 125 61 128 60 Z" fill="#ED6B2F" opacity="0.5"/>
+  <!-- Eye white -->
+  <circle cx="110" cy="46" r="9" fill="#FFFFFF"/>
+  <!-- Eye pupil -->
+  <circle cx="112" cy="47" r="5" fill="#0A3D62"/>
+  <circle cx="114" cy="45" r="1.8" fill="#FFFFFF" opacity="0.9"/>
+  <!-- Cheek blush -->
+  <ellipse cx="88" cy="62" rx="8" ry="5" fill="#FF8C42" opacity="0.15"/>
+</svg>
