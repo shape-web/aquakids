@@ -367,6 +367,197 @@ body {
   color: rgba(10, 61, 98, 0.45);
 }
 
+/* ── Trust scroll story (Warum wir) ── */
+.trust-story-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+@media (min-width: 768px) {
+  .trust-story-stack {
+    gap: 5.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .trust-story-stack {
+    gap: 6.5rem;
+  }
+}
+
+.trust-story-segment {
+  position: relative;
+  width: 100%;
+}
+
+.trust-story-row {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 38.75rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .trust-story-row--left {
+    transform: translateX(-16%);
+  }
+
+  .trust-story-row--right {
+    transform: translateX(16%);
+  }
+}
+
+.trust-story-deco {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.22;
+}
+
+.trust-story-deco-img {
+  width: auto;
+  max-width: 4.5rem;
+}
+
+.trust-story-segment--left .trust-story-deco {
+  right: 2%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.trust-story-segment--right .trust-story-deco {
+  left: 2%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.trust-story-deco--dolphin .trust-story-deco-img,
+.trust-story-deco--dolphin-b .trust-story-deco-img {
+  max-width: 5.5rem;
+  animation: trust-story-deco-drift 36s ease-in-out infinite;
+}
+
+.trust-story-deco--fish .trust-story-deco-img,
+.trust-story-deco--fish-b .trust-story-deco-img {
+  animation: trust-story-deco-drift 30s ease-in-out infinite reverse;
+}
+
+.trust-story-deco--octopus .trust-story-deco-img {
+  max-width: 3.25rem;
+  animation: trust-story-deco-drift 34s ease-in-out infinite;
+}
+
+@keyframes trust-story-deco-drift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(6px, -8px, 0); }
+}
+
+.trust-point {
+  position: relative;
+}
+
+.trust-point-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .trust-point-inner {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+}
+
+.trust-point-icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 9999px;
+  color: #007f7c;
+  background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.5), rgba(91, 192, 235, 0.14));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  box-shadow:
+    0 0 16px rgba(91, 192, 235, 0.16),
+    0 0 5px rgba(0, 158, 155, 0.08);
+}
+
+.trust-point-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .trust-point-icon {
+    width: 5.25rem;
+    height: 5.25rem;
+  }
+
+  .trust-point-icon svg {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+.trust-point-icon-float {
+  animation: trust-point-icon-float var(--trust-float-duration, 11s) ease-in-out infinite;
+  animation-delay: var(--trust-float-delay, 0s);
+  will-change: transform;
+}
+
+.trust-point-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .trust-point-copy {
+    padding-top: 0.375rem;
+  }
+}
+
+.trust-point-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+  color: #062f4d;
+}
+
+.trust-point-text {
+  margin-top: 0.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: rgba(8, 58, 94, 0.88);
+}
+
+@media (min-width: 768px) {
+  .trust-point-title {
+    font-size: 1.375rem;
+    line-height: 1.3;
+  }
+
+  .trust-point-text {
+    margin-top: 0.625rem;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+}
+
+@keyframes trust-point-icon-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -4px, 0); }
+}
+
 .bubble-input:focus {
   outline: none;
   border-color: var(--color-turquoise);
@@ -384,6 +575,143 @@ body {
   animation: course-icon-float 5s ease-in-out infinite;
   animation-delay: var(--icon-delay, 0s);
   will-change: transform;
+}
+
+/* ── Course dive stations (Kurse) ── */
+.courses-dive-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+@media (min-width: 768px) {
+  .courses-dive-stack {
+    gap: 6.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .courses-dive-stack {
+    gap: 7.5rem;
+  }
+}
+
+.courses-dive-segment {
+  position: relative;
+  width: 100%;
+}
+
+.courses-dive-row {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 53rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .courses-dive-row--left {
+    transform: translateX(-7rem);
+  }
+
+  .courses-dive-row--right {
+    transform: translateX(7rem);
+  }
+}
+
+.course-station-card {
+  display: flex;
+  min-height: 16.25rem;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 1.75rem;
+}
+
+@media (min-width: 768px) {
+  .course-station-card {
+    min-height: 19rem;
+    padding: 2.25rem 2.5rem;
+  }
+}
+
+.course-station-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--color-ocean-deep);
+}
+
+@media (min-width: 768px) {
+  .course-station-title {
+    font-size: 1.75rem;
+  }
+}
+
+.course-station-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.125rem;
+}
+
+.course-station-text {
+  margin-top: 1.125rem;
+  max-width: 42rem;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: rgba(8, 58, 94, 0.86);
+}
+
+@media (min-width: 768px) {
+  .course-station-text {
+    margin-top: 1.25rem;
+    font-size: 1.0625rem;
+  }
+}
+
+.course-dive-deco {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.22;
+}
+
+.course-dive-deco-img {
+  width: auto;
+}
+
+.courses-dive-segment--left .course-dive-deco {
+  right: 4%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.courses-dive-segment--right .course-dive-deco {
+  left: 4%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.course-dive-deco--dolphin .course-dive-deco-img {
+  max-width: 5.5rem;
+  animation: course-dive-deco-drift 38s ease-in-out infinite;
+}
+
+.course-dive-deco--fish-a .course-dive-deco-img,
+.course-dive-deco--fish-b .course-dive-deco-img {
+  max-width: 3.75rem;
+  animation: course-dive-deco-drift 32s ease-in-out infinite reverse;
+}
+
+.course-dive-deco--jelly .course-dive-deco-img {
+  max-width: 3.5rem;
+  animation: course-dive-deco-drift 36s ease-in-out infinite;
+}
+
+@keyframes course-dive-deco-drift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(8px, -10px, 0); }
 }
 
 /* ── Ocean waves (seamless horizontal loop) ── */
@@ -591,7 +919,9 @@ body {
   .ocean-octopus,
   .hero-octopus-drift,
   .ocean-crab-walk,
-  .course-icon-float,
+  .trust-point-icon-float,
+  .trust-story-deco-img,
+  .course-dive-deco-img,
   .ocean-scene-bubble {
     animation: none !important;
   }

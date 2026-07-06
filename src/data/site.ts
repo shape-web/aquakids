@@ -75,30 +75,44 @@ export const courses: Course[] = [
   },
 ];
 
+export type WhyUsIcon =
+  | "groups"
+  | "care"
+  | "patience"
+  | "method"
+  | "safety"
+  | "transparency";
+
 export const whyUsItems = [
   {
     title: "Kleine Gruppen",
-    description: "Maximal 6 Kinder pro Kurs – damit jedes Kind die Aufmerksamkeit bekommt, die es verdient.",
+    description: "Maximal 6 Kinder pro Kurs – persönliche Aufmerksamkeit.",
+    icon: "groups" as const,
   },
   {
     title: "Individuelle Betreuung",
-    description: "Jedes Kind lernt in seinem eigenen Tempo. Wir passen uns an, nicht umgekehrt.",
+    description: "Jedes Kind lernt im eigenen Tempo – wir passen uns an.",
+    icon: "care" as const,
   },
   {
     title: "Geduld statt Druck",
-    description: "Kein Zeitdruck, keine Vergleiche. Vertrauen entsteht durch Geduld und positive Erfahrungen.",
+    description: "Kein Zeitdruck, keine Vergleiche – Vertrauen wächst.",
+    icon: "patience" as const,
   },
   {
     title: "Spielerische Methode",
-    description: "Spiele, Lieder und kleine Abenteuer machen das Lernen zum Erlebnis.",
+    description: "Spiele und Abenteuer – Lernen mit Freude.",
+    icon: "method" as const,
   },
   {
     title: "Sicherheit",
-    description: "Qualifizierte Trainer, klare Regeln und eine liebevoll gestaltete Umgebung.",
+    description: "Qualifizierte Trainer und klare Regeln – jeden Tag.",
+    icon: "safety" as const,
   },
   {
     title: "Eltern-Transparenz",
-    description: "Klare Kommunikation über Fortschritte, Kursziele und nächste Schritte.",
+    description: "Klare Kommunikation über Fortschritte und Ziele.",
+    icon: "transparency" as const,
   },
 ];
 
