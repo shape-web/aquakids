@@ -1,7 +1,6 @@
 "use client";
 
 import type { ReactNode } from "react";
-import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { whyUsItems } from "@/data/site";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -11,23 +10,14 @@ import { cn } from "@/lib/utils";
 
 const FLOAT_MOTION = [
   { floatDuration: 11, floatDelay: 0 },
-  { floatDuration: 12.5, floatDelay: 1.2 },
-  { floatDuration: 10.5, floatDelay: 0.5 },
-  { floatDuration: 12, floatDelay: 1.8 },
-  { floatDuration: 11.5, floatDelay: 0.9 },
-  { floatDuration: 13, floatDelay: 2.1 },
+  { floatDuration: 13.5, floatDelay: 1.2 },
+  { floatDuration: 10, floatDelay: 0.5 },
+  { floatDuration: 12.8, floatDelay: 1.8 },
+  { floatDuration: 11.8, floatDelay: 0.9 },
+  { floatDuration: 14, floatDelay: 2.1 },
 ] as const;
 
 const STORY_ALIGN = ["left", "right", "left", "right", "left", "right"] as const;
-
-const STORY_DECO = [
-  { src: "/ocean/animals/dolphin.svg", width: 88, className: "trust-story-deco--dolphin" },
-  { src: "/ocean/animals/fish-06.svg", width: 56, className: "trust-story-deco--fish" },
-  { src: "/ocean/animals/octopus.svg", width: 52, className: "trust-story-deco--octopus" },
-  { src: "/ocean/animals/fish-04.svg", width: 52, className: "trust-story-deco--fish-b" },
-  { src: "/ocean/animals/dolphin.svg", width: 72, className: "trust-story-deco--dolphin-b" },
-  null,
-] as const;
 
 function TrustReveal({ children }: { children: ReactNode }) {
   const prefersReducedMotion = useReducedMotion();
@@ -72,49 +62,27 @@ export function WhyUs() {
           {whyUsItems.map((item, index) => {
             const motion = FLOAT_MOTION[index];
             const align = STORY_ALIGN[index] ?? "left";
-            const deco = STORY_DECO[index];
 
             return (
-              <div
-                key={item.title}
-                className={cn(
-                  "trust-story-segment",
-                  align === "left"
-                    ? "trust-story-segment--left"
-                    : "trust-story-segment--right"
-                )}
-              >
-                {deco && (
-                  <div className={cn("trust-story-deco hidden md:block", deco.className)} aria-hidden="true">
-                    <Image
-                      src={deco.src}
-                      alt=""
-                      width={deco.width}
-                      height={deco.width}
-                      className="trust-story-deco-img h-auto"
-                    />
-                  </div>
-                )}
-
-                <TrustReveal>
-                  <div
-                    className={cn(
-                      "trust-story-row",
-                      align === "left"
-                        ? "trust-story-row--left"
-                        : "trust-story-row--right"
-                    )}
-                  >
-                    <TrustPoint
-                      title={item.title}
-                      description={item.description}
-                      icon={item.icon}
-                      floatDuration={motion?.floatDuration ?? 11}
-                      floatDelay={motion?.floatDelay ?? 0}
-                    />
-                  </div>
-                </TrustReveal>
-              </div>
+              <TrustReveal key={item.title}>
+                <div
+                  className={cn(
+                    "trust-story-row",
+                    align === "left"
+                      ? "trust-story-row--left"
+                      : "trust-story-row--right"
+                  )}
+                >
+                  <TrustPoint
+                    title={item.title}
+                    description={item.description}
+                    icon={item.icon}
+                    bubbleVariant={index}
+                    floatDuration={motion?.floatDuration ?? 11}
+                    floatDelay={motion?.floatDelay ?? 0}
+                  />
+                </div>
+              </TrustReveal>
             );
           })}
         </div>

@@ -28,20 +28,28 @@ export function Hero() {
           </FadeIn>
 
           <FadeIn delay={0.2}>
-            <p className="mt-5 text-lg leading-relaxed text-ocean-deep/85 md:text-xl">
+            <p className="mt-5 max-w-[34rem] text-lg leading-relaxed text-ocean-deep/85 md:text-xl">
               Spielerische Schwimmkurse für Kinder – mit Geduld, Erfahrung und
               ganz viel Spaß am Wasser.
             </p>
           </FadeIn>
 
           <FadeIn delay={0.3}>
-            <ul className="mt-7 grid gap-2.5 sm:grid-cols-2">
-              {trustPoints.map((point) => (
-                <li key={point} className="trust-pill">
-                  <span className="trust-pill-check" aria-hidden="true">
-                    ✓
+            <ul className="hero-trust-list mt-7">
+              {trustPoints.map((point, index) => (
+                <li key={point.title} className="hero-trust-item">
+                  <span
+                    className={`hero-trust-bubble hero-trust-bubble--${index}`}
+                    aria-hidden="true"
+                  >
+                    <span className="hero-trust-bubble-float">
+                      <span className="hero-trust-check">✓</span>
+                    </span>
                   </span>
-                  <span className="trust-pill-text">{point}</span>
+                  <span className="hero-trust-copy">
+                    <span className="hero-trust-title">{point.title}</span>
+                    <span className="hero-trust-detail">{point.description}</span>
+                  </span>
                 </li>
               ))}
             </ul>

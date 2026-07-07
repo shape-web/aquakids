@@ -20,10 +20,22 @@ export const navLinks = [
 ];
 
 export const trustPoints = [
-  "kleine Gruppen",
-  "erfahrene Schwimmtrainer",
-  "spielerisches Lernen",
-  "sichere Umgebung",
+  {
+    title: "kleine Gruppen",
+    description: "Maximal 6 Kinder pro Kurs",
+  },
+  {
+    title: "spielerisches Lernen",
+    description: "Mit Freude und Sicherheit",
+  },
+  {
+    title: "erfahrene Schwimmtrainer",
+    description: "Liebevolle Begleitung",
+  },
+  {
+    title: "sichere Umgebung",
+    description: "Vertrauen im Wasser",
+  },
 ] as const;
 
 export const poolInfo = {
