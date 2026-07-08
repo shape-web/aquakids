@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { siteConfig, courseOptions } from "@/data/site";
+import { COURSE_INTEREST_EVENT } from "@/lib/courseInterest";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { BubbleCard } from "@/components/ui/BubbleCard";
 import { Button } from "@/components/ui/Button";
@@ -9,6 +10,20 @@ import { FadeIn } from "@/components/ui/FadeIn";
 
 export function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [course, setCourse] = useState<string>(courseOptions[0]);
+
+  useEffect(() => {
+    const handleCourseInterest = (event: Event) => {
+      const value = (event as CustomEvent<string>).detail;
+      if (value && courseOptions.includes(value as (typeof courseOptions)[number])) {
+        setCourse(value);
+      }
+    };
+
+    window.addEventListener(COURSE_INTEREST_EVENT, handleCourseInterest);
+    return () =>
+      window.removeEventListener(COURSE_INTEREST_EVENT, handleCourseInterest);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,7 +104,13 @@ export function Contact() {
                   <label htmlFor="course" className="mb-1.5 block text-sm font-medium text-ocean-deep">
                     Kursinteresse
                   </label>
-                  <select id="course" name="course" className="bubble-input">
+                  <select
+                    id="course"
+                    name="course"
+                    className="bubble-input"
+                    value={course}
+                    onChange={(e) => setCourse(e.target.value)}
+                  >
                     {courseOptions.map((opt) => (
                       <option key={opt} value={opt}>
                         {opt}

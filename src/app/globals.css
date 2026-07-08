@@ -83,11 +83,21 @@ body {
 }
 
 .section-label {
-  font-size: 1.5rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  line-height: 1.1;
+  line-height: 1.15;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 768px) {
+  .section-label {
+    font-size: 1.5rem;
+    letter-spacing: 0.14em;
+    line-height: 1.1;
+  }
 }
 
 .section-label-surface {
@@ -776,6 +786,43 @@ body {
   .course-station-card {
     min-height: 14.25rem;
     padding: 1.75rem 2.5rem;
+  }
+}
+
+.course-station-card--clickable {
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.course-station-card--clickable:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 16px 40px rgba(10, 61, 98, 0.14),
+    0 4px 12px rgba(10, 61, 98, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.course-station-card--clickable:focus-visible {
+  outline: none;
+  box-shadow:
+    0 12px 32px rgba(10, 61, 98, 0.12),
+    0 0 0 3px rgba(46, 196, 182, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.course-station-card--clickable:active {
+  transform: translateY(-1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .course-station-card--clickable {
+    transition: none;
+  }
+
+  .course-station-card--clickable:hover {
+    transform: none;
   }
 }
 

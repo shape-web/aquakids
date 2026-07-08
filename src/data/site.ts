@@ -53,6 +53,7 @@ export type Course = {
   age?: string;
   description: string;
   goal?: string;
+  formValue: string;
 };
 
 export const courses: Course[] = [
@@ -63,6 +64,7 @@ export const courses: Course[] = [
     age: "2–4 Jahre",
     description: "Spielerischer Einstieg ins Wasser.",
     goal: "Vertrauen zum Wasser entwickeln",
+    formValue: "Wassergewöhnung (2–4 Jahre)",
   },
   {
     id: "anfaenger",
@@ -70,6 +72,7 @@ export const courses: Course[] = [
     title: "Anfänger",
     description: "Erste Schwimmbewegungen und Wassersicherheit.",
     goal: "Vorbereitung Seepferdchen",
+    formValue: "Anfänger / Seepferdchen",
   },
   {
     id: "fortgeschritten",
@@ -77,6 +80,7 @@ export const courses: Course[] = [
     title: "Fortgeschritten",
     description: "Technik vertiefen und Ausdauer aufbauen.",
     goal: "Sicherer schwimmen",
+    formValue: "Fortgeschritten",
   },
   {
     id: "einzeltraining",
@@ -84,6 +88,7 @@ export const courses: Course[] = [
     title: "Einzeltraining",
     description: "Individuelle Förderung mit persönlichem Trainer.",
     goal: "Persönliche Förderung",
+    formValue: "Einzeltraining",
   },
 ];
 
@@ -203,7 +208,7 @@ export const faqItems = [
 
 export const courseOptions = [
   "Wassergewöhnung (2–4 Jahre)",
-  "Anfänger",
+  "Anfänger / Seepferdchen",
   "Fortgeschritten",
   "Einzeltraining",
   "Noch unsicher",
