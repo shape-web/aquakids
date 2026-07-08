@@ -16,9 +16,11 @@ export function Hero() {
       <HeroSurface />
 
       <div className="relative z-10 mx-auto w-full max-w-6xl">
-        <FadeIn delay={0.35} className="hero-pool-info" aria-label="Aktuelle Pool-Infos">
-          <PoolInfoBuoy />
-        </FadeIn>
+        <div className="hero-pool-info" aria-label="Aktuelle Pool-Infos">
+          <FadeIn delay={0.35}>
+            <PoolInfoBuoy />
+          </FadeIn>
+        </div>
 
         <div className="max-w-xl text-left lg:max-w-2xl">
           <FadeIn>

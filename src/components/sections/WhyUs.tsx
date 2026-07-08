@@ -17,8 +17,6 @@ const FLOAT_MOTION = [
   { floatDuration: 14, floatDelay: 2.1 },
 ] as const;
 
-const STORY_ALIGN = ["left", "right", "left", "right", "left", "right"] as const;
-
 function TrustReveal({ children }: { children: ReactNode }) {
   const prefersReducedMotion = useReducedMotion();
 
@@ -61,18 +59,10 @@ export function WhyUs() {
         >
           {whyUsItems.map((item, index) => {
             const motion = FLOAT_MOTION[index];
-            const align = STORY_ALIGN[index] ?? "left";
 
             return (
               <TrustReveal key={item.title}>
-                <div
-                  className={cn(
-                    "trust-story-row",
-                    align === "left"
-                      ? "trust-story-row--left"
-                      : "trust-story-row--right"
-                  )}
-                >
+                <div className={cn("trust-story-row", `trust-story-row--${index}`)}>
                   <TrustPoint
                     title={item.title}
                     description={item.description}

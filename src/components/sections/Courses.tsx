@@ -8,7 +8,6 @@ import { BubbleCard } from "@/components/ui/BubbleCard";
 import { BubbleBadge } from "@/components/ui/BubbleBadge";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
-import { CourseWaterStream } from "./CourseWaterStream";
 
 function CourseReveal({ children }: { children: ReactNode }) {
   const prefersReducedMotion = useReducedMotion();
@@ -46,31 +45,27 @@ export function Courses() {
           />
         </FadeIn>
 
-        <div className="courses-dive-stage mt-8 md:mt-10">
-          <CourseWaterStream />
+        <div className="courses-dive-stack mt-8 md:mt-10" aria-label="Unsere Kurse">
+          {courses.map((course) => (
+            <CourseReveal key={course.id}>
+              <div className="courses-dive-row">
+                <BubbleCard as="article" className="course-station-card">
+                  <h3 className="course-station-title">{course.title}</h3>
 
-          <div className="courses-dive-stack" aria-label="Unsere Kurse">
-            {courses.map((course) => (
-              <CourseReveal key={course.id}>
-                <div className="courses-dive-row">
-                  <BubbleCard as="article" className="course-station-card">
-                    <h3 className="course-station-title">{course.title}</h3>
+                  <div className="course-station-badges">
+                    {course.age && (
+                      <BubbleBadge label="Alter" value={course.age} />
+                    )}
+                    {course.goal && (
+                      <BubbleBadge label="Ziel" value={course.goal} />
+                    )}
+                  </div>
 
-                    <div className="course-station-badges">
-                      {course.age && (
-                        <BubbleBadge label="Alter" value={course.age} />
-                      )}
-                      {course.goal && (
-                        <BubbleBadge label="Ziel" value={course.goal} />
-                      )}
-                    </div>
-
-                    <p className="course-station-text">{course.description}</p>
-                  </BubbleCard>
-                </div>
-              </CourseReveal>
-            ))}
-          </div>
+                  <p className="course-station-text">{course.description}</p>
+                </BubbleCard>
+              </div>
+            </CourseReveal>
+          ))}
         </div>
 
         <FadeIn className="mt-14 text-center md:mt-16">
