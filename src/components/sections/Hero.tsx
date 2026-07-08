@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { HeroSurface } from "@/components/ocean/HeroSurface";
+import { PoolInfoBuoy } from "@/components/ui/PoolInfoBuoy";
 import { trustPoints } from "@/data/site";
 
 export function Hero() {
@@ -15,6 +16,10 @@ export function Hero() {
       <HeroSurface />
 
       <div className="relative z-10 mx-auto w-full max-w-6xl">
+        <FadeIn delay={0.35} className="hero-pool-info" aria-label="Aktuelle Pool-Infos">
+          <PoolInfoBuoy />
+        </FadeIn>
+
         <div className="max-w-xl text-left lg:max-w-2xl">
           <FadeIn>
             <p className="section-label section-label-surface">Kinderschwimmschule</p>

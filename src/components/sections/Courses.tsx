@@ -8,9 +8,7 @@ import { BubbleCard } from "@/components/ui/BubbleCard";
 import { BubbleBadge } from "@/components/ui/BubbleBadge";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
-
-const COURSE_ALIGN = ["left", "right", "left", "right"] as const;
+import { CourseWaterStream } from "./CourseWaterStream";
 
 function CourseReveal({ children }: { children: ReactNode }) {
   const prefersReducedMotion = useReducedMotion();
@@ -48,20 +46,13 @@ export function Courses() {
           />
         </FadeIn>
 
-        <div className="courses-dive-stack mt-8 md:mt-10" aria-label="Unsere Kurse">
-          {courses.map((course, index) => {
-            const align = COURSE_ALIGN[index] ?? "left";
+        <div className="courses-dive-stage mt-8 md:mt-10">
+          <CourseWaterStream />
 
-            return (
+          <div className="courses-dive-stack" aria-label="Unsere Kurse">
+            {courses.map((course) => (
               <CourseReveal key={course.id}>
-                <div
-                  className={cn(
-                    "courses-dive-row",
-                    align === "left"
-                      ? "courses-dive-row--left"
-                      : "courses-dive-row--right"
-                  )}
-                >
+                <div className="courses-dive-row">
                   <BubbleCard as="article" className="course-station-card">
                     <h3 className="course-station-title">{course.title}</h3>
 
@@ -78,8 +69,8 @@ export function Courses() {
                   </BubbleCard>
                 </div>
               </CourseReveal>
-            );
-          })}
+            ))}
+          </div>
         </div>
 
         <FadeIn className="mt-14 text-center md:mt-16">

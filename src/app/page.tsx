@@ -2,7 +2,6 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { OceanWorld } from "@/components/ocean/OceanWorld";
 import { Hero } from "@/components/sections/Hero";
-import { Aktuelles } from "@/components/sections/Aktuelles";
 import { Courses } from "@/components/sections/Courses";
 import { WhyUs } from "@/components/sections/WhyUs";
 import { SwimProcess } from "@/components/sections/SwimProcess";
@@ -19,7 +18,6 @@ export default function Home() {
       <Header />
       <main className="relative z-10">
         <Hero />
-        <Aktuelles />
         <Courses />
         <WhyUs />
         <SwimProcess />
