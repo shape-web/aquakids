@@ -8,9 +8,7 @@ export function Footer() {
           <div>
             <p className="text-lg font-bold text-white">{siteConfig.name}</p>
             <p className="mt-1 text-sm">{siteConfig.tagline}</p>
-            <p className="mt-4 text-sm">
-              Portfolio-Designstudie · Kinderschwimmschule
-            </p>
+            <p className="mt-4 text-sm">Kinderschwimmschule</p>
           </div>
           <nav className="flex flex-wrap gap-x-6 gap-y-2" aria-label="Footer Navigation">
             {navLinks.map((link) => (
@@ -25,7 +23,7 @@ export function Footer() {
           </nav>
         </div>
         <p className="mt-10 border-t border-white/10 pt-6 text-xs text-white/40">
-          © {new Date().getFullYear()} {siteConfig.name} — Designstudie
+          © {new Date().getFullYear()} {siteConfig.name}
         </p>
       </div>
     </footer>

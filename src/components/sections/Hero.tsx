@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { HeroSurface } from "@/components/ocean/HeroSurface";
 import { PoolInfoBuoy } from "@/components/ui/PoolInfoBuoy";
-import { trustPoints } from "@/data/site";
+import { siteConfig } from "@/data/site";
 
 export function Hero() {
   return (
@@ -24,48 +24,32 @@ export function Hero() {
 
         <div className="max-w-xl text-left lg:max-w-2xl">
           <FadeIn>
-            <p className="section-label section-label-surface">Kinderschwimmschule</p>
-          </FadeIn>
-
-          <FadeIn delay={0.1}>
-            <h1 id="hero-heading" className="display-hero mt-3 text-ocean-deep">
-              Schwimmen lernen mit{" "}
-              <span className="text-accent-surface">Freude</span> und Sicherheit
+            <h1
+              id="hero-heading"
+              className="display-brand text-ocean-deep"
+            >
+              {siteConfig.name}
             </h1>
           </FadeIn>
 
+          <FadeIn delay={0.1}>
+            <p className="display-hero mt-4 text-ocean-deep md:mt-5">
+              Dein Kind. Sicher im Wasser.{" "}
+              <span className="text-accent-surface">Mit richtig viel Spaß.</span>
+            </p>
+          </FadeIn>
+
           <FadeIn delay={0.2}>
-            <p className="mt-5 max-w-[34rem] text-lg leading-relaxed text-ocean-deep/85 md:text-xl">
-              Spielerische Schwimmkurse für Kinder – mit Geduld, Erfahrung und
-              ganz viel Spaß am Wasser.
+            <p className="mt-5 max-w-[28rem] text-lg leading-relaxed text-ocean-deep/85 md:mt-6 md:text-xl">
+              Spielerische Schwimmkurse in kleinen Gruppen — mit Geduld und
+              Sicherheit.
             </p>
           </FadeIn>
 
           <FadeIn delay={0.3}>
-            <ul className="hero-trust-list mt-7">
-              {trustPoints.map((point, index) => (
-                <li key={point.title} className="hero-trust-item">
-                  <span
-                    className={`hero-trust-bubble hero-trust-bubble--${index}`}
-                    aria-hidden="true"
-                  >
-                    <span className="hero-trust-bubble-float">
-                      <span className="hero-trust-check">✓</span>
-                    </span>
-                  </span>
-                  <span className="hero-trust-copy">
-                    <span className="hero-trust-title">{point.title}</span>
-                    <span className="hero-trust-detail">{point.description}</span>
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </FadeIn>
-
-          <FadeIn delay={0.4}>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-9 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <Button href="#kurse">Kurs finden</Button>
-              <Button href="#warum-wir" variant="secondary">
+              <Button href="#warum-wir" variant="ghost" className="!px-4 !py-2.5 text-sm">
                 Mehr erfahren
               </Button>
             </div>

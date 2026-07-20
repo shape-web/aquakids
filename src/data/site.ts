@@ -4,7 +4,7 @@ export const siteConfig = {
   title: "AquaKids — Schwimmschule für Kinder",
   description:
     "Spielerische Schwimmkurse für Kinder – mit Geduld, Erfahrung und ganz viel Spaß am Wasser. Kleine Gruppen, erfahrene Trainer, sichere Umgebung.",
-  url: "https://aquakids.example.de",
+  url: "https://aquakids.de",
   email: "hallo@aquakids.de",
   phone: "+49 30 123 456 78",
   ogImage: "/ocean/objects/buoy-duck.svg",
@@ -18,25 +18,6 @@ export const navLinks = [
   { href: "#faq", label: "FAQ" },
   { href: "#kontakt", label: "Kontakt" },
 ];
-
-export const trustPoints = [
-  {
-    title: "kleine Gruppen",
-    description: "Maximal 6 Kinder pro Kurs",
-  },
-  {
-    title: "spielerisches Lernen",
-    description: "Mit Freude und Sicherheit",
-  },
-  {
-    title: "erfahrene Schwimmtrainer",
-    description: "Liebevolle Begleitung",
-  },
-  {
-    title: "sichere Umgebung",
-    description: "Vertrauen im Wasser",
-  },
-] as const;
 
 export const poolInfo = {
   message: "Neue Anfängergruppen ab August verfügbar",
